@@ -1,0 +1,23 @@
+﻿@model List<User>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<div>
+    @if (Model != null)
+    {
+    @foreach (var user in Model)
+    {
+		 <p> @user.Id- @user.Name </p>
+    }      }
+            else
+            {
+                <p>User not valid</p>
+            }
+</div>
