@@ -11,12 +11,12 @@ using WebApi.Services;
 namespace WebApi.Controllers
 {
     [ApiController]
-    [Route("api/users")]
-    public class UserController : ControllerBase
+    [Route("Api/TUsers")]
+    public class TestUserController : ControllerBase
     {
         private IUserService _userService;
 
-        public UserController(IUserService userService)
+        public TestUserController(IUserService userService)
         {
             _userService = userService;
         }
