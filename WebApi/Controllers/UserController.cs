@@ -22,32 +22,39 @@ namespace WebApi.Controllers
         }
 
         [HttpGet]
-         public IEnumerable<User> GetList()
+        public IEnumerable<User> GetList()
         {
             var users = _userService.GetUserList();
-            return users; 
+            return users;
         }
 
         [HttpGet("{id}")]
         public IActionResult GetSingle(int id)
         {
             var user = _userService.GetSingle(id);
-            if(user == null) return NotFound();
-            
+            if (user == null) return NotFound();
+
             return Ok(user);
         }
 
         [HttpDelete("{id}")]
-        public async Task<User> DeleteAsync (int id)
+        public async Task<User> DeleteAsync(int id)
         {
             return await _userService.Delete(id);
-        }        
-        
+        }
+
         [HttpPost]
         public async Task<IActionResult> CreateAsync([FromBody] User user)
         {
             var createdUser = await _userService.Create(user);
             return Ok(createdUser);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(int id, [FromBody] User user)
+        {
+            await _userService.UpdateAsync(id, user);
+            return NoContent();
         }
 
 
@@ -58,5 +65,5 @@ namespace WebApi.Controllers
             var users = _userService.GetUserList();
             return users;
         }
-    } 
+    }
 }

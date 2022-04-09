@@ -9,6 +9,7 @@ namespace WebApi.Services
     {
         IEnumerable<User> GetUserList();
         Task<User> Create(User user);
+        Task<bool> UpdateAsync(int id, User user);
         Task<User> Delete(int id);
         User GetSingle(int id);
     }

@@ -49,5 +49,13 @@ namespace WebApi.Services
         {
             return context.Users.Include(x => x.Books);
         }
+
+        public async Task<bool> UpdateAsync(int id, User user)
+        {
+            //var userToDelete = context.Users.FirstOrDefault(x => x.Id == id);
+               
+            context.Users.Update(user);
+            return await context.SaveChangesAsync() > 0;
+        }
     }
 }

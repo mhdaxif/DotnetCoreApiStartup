@@ -40,7 +40,10 @@ namespace WebApi
             services.AddControllersWithViews()
                      .AddNewtonsoftJson(options =>
                      options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
-           
+
+            services.AddScoped<GreetFilter>();
+            services.AddScoped<SampleActionFilter>();
+
             var Issuer = Configuration["Jwt:Issuer"];
             var Audience = Configuration["Jwt:Audience"];
 
@@ -73,6 +76,16 @@ namespace WebApi
                  opt.SaveToken = true;
                  opt.TokenValidationParameters = tokenValidationParameters;
              });
+
+            services.AddCors(opt =>
+            {
+                opt.AddPolicy(name: "CORS", policy =>
+                {
+                    policy.AllowAnyHeader()
+                          .AllowAnyMethod()
+                          .AllowAnyOrigin();
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -85,6 +98,7 @@ namespace WebApi
 
             app.UseHttpsRedirection();
 
+            app.UseCors("CORS");
             app.UseRouting();
 
             app.UseAuthentication();

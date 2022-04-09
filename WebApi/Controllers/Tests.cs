@@ -10,6 +10,8 @@ using WebApi.Services;
 
 namespace WebApi.Controllers
 {
+    [ServiceFilter(typeof(GreetFilter))]
+    [ServiceFilter(typeof(SampleActionFilter))]
     [ApiController]
     [Route("Api/TUsers")]
     public class TestUserController : ControllerBase
